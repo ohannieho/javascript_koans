@@ -1,0 +1,502 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "var _; //globals\n\ndescribe(\"About Applying What We Have Learnt\", function() {\n\n  var products;\n\n  beforeEach(function () { \n    products = [\n       { name: \"Sonoma\", ingredients: [\"artichoke\", \"sundried tomatoes\", \"mushrooms\"], containsNuts: false },\n       { name: \"Pizza Primavera\", ingredients: [\"roma\", \"sundried tomatoes\", \"goats cheese\", \"rosemary\"], containsNuts: false },\n       { name: \"South Of The Border\", ingredients: [\"black beans\", \"jalapenos\", \"mushrooms\"], containsNuts: false },\n       { name: \"Blue Moon\", ingredients: [\"blue cheese\", \"garlic\", \"walnuts\"], containsNuts: true },\n       { name: \"Taste Of Athens\", ingredients: [\"spinach\", \"kalamata olives\", \"sesame seeds\"], containsNuts: true }\n    ];\n  });\n\n  /*********************************************************************************/\n\n  it(\"given I'm allergic to nuts and hate mushrooms, it should find a pizza I can eat (imperative)\", function () {\n\n    var i,j,hasMushrooms, productsICanEat = [];\n\n    for (i = 0; i < products.length; i+=1) {\n        if (products[i].containsNuts === false) {\n            hasMushrooms = false;\n            for (j = 0; j < products[i].ingredients.length; j+=1) {\n               if (products[i].ingredients[j] === \"mushrooms\") {\n                  hasMushrooms = true;\n               }\n            }\n            if (!hasMushrooms) productsICanEat.push(products[i]);\n        }\n    }\n\n    expect(productsICanEat.length).toBe(1);\n  });\n\n  it(\"given I'm allergic to nuts and hate mushrooms, it should find a pizza I can eat (functional)\", function () {\n\n      var productsICanEat = [];\n\n      products.filter(function(product){\n\n        return (!product.containsNuts && !product.hasMushrooms);\n\n\n      })\n\n**      products.any(function(product){\n          return this.some(product || function(x) {return x});\n\n      });\n\n      expect(productsICanEat.length).toBe(1);\n  });\n\n  /*********************************************************************************/\n\n  it(\"should add all the natural numbers below 1000 that are multiples of 3 or 5 (imperative)\", function () {\n    \n    var sum = 0;\n    for(var i=1; i<1000; i+=1) {\n      if (i % 3 === 0 || i % 5 === 0) {\n        sum += i;\n      }\n    }\n    \n    expect(sum).toBe(233168);\n  });\n\n  it(\"should add all the natural numbers below 1000 that are multiples of 3 or 5 (functional)\", function () {\n\n    var sum = FILL_ME_IN;    /* try chaining range() and reduce() */\n\n    expect(233168).toBe(sum);\n  });\n\n  /*********************************************************************************/\n   it(\"should count the ingredient occurrence (imperative)\", function () {\n    var ingredientCount = { \"{ingredient name}\": 0 };\n\n    for (i = 0; i < products.length; i+=1) {\n        for (j = 0; j < products[i].ingredients.length; j+=1) {\n            ingredientCount[products[i].ingredients[j]] = (ingredientCount[products[i].ingredients[j]] || 0) + 1;\n        }\n    }\n\n    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);\n  });\n\n  it(\"should count the ingredient occurrence (functional)\", function () {\n    var ingredientCount = { \"{ingredient name}\": 0 };\n\n    /* chain() together map(), flatten() and reduce() */\n\n    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);\n  });\n\n  /*********************************************************************************/\n  /* UNCOMMENT FOR EXTRA CREDIT */\n  /*\n  it(\"should find the largest prime factor of a composite number\", function () {\n  \n  });\n\n  it(\"should find the largest palindrome made from the product of two 3 digit numbers\", function () {\n    \n  });\n\n  it(\"should find the smallest number divisible by each of the numbers 1 to 20\", function () {\n      \n    \n  });\n\n  it(\"should find the difference between the sum of the squares and the square of the sums\", function () {\n    \n  });\n\n  it(\"should find the 10001st prime\", function () {\n\n  });\n  */\n});\n",
+			"file": "koans/AboutApplyingWhatWeHaveLearnt.js",
+			"file_size": 3718,
+			"file_write_time": 131917021574136860,
+			"settings":
+			{
+				"buffer_size": 3873,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "koans/AboutHigherOrderFunctions.js",
+			"settings":
+			{
+				"buffer_size": 3140,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "KoansRunner.html",
+			"settings":
+			{
+				"buffer_size": 1574,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "describe(\"About Expects\", function() {\n\n  //We shall contemplate truth by testing reality, via spec expectations.  \n  it(\"should expect true\", function() {\n    expect(true).toBeTruthy(); //This should be true\n  }); \n\n  //To understand reality, we must compare our expectations against reality.\n  it(\"should expect equality\", function () { \n\t  var expectedValue = 2;\n\t  var actualValue = 1 + 1;\n\t\n\t  expect(actualValue === expectedValue).toBeTruthy();\n  });  \n\n  //Some ways of asserting equality are better than others.\n  it(\"should assert equality a better way\", function () { \n\t  var expectedValue = 2;\n\t  var actualValue = 1 + 1;\n\t\n  // toEqual() compares using common sense equality.\n\t  expect(actualValue).toEqual(expectedValue);\n  });\n\n  //Sometimes you need to be really exact about what you \"type\".\n  it(\"should assert equality with ===\", function () { \n\t  var expectedValue = '2';\n\t  var actualValue = (1 + 1).toString();\n\t\n  // toBe() will always use === to compare.\n\t  expect(actualValue).toBe(expectedValue);\n  });  \n\n  //Sometimes we will ask you to fill in the values.\n  it(\"should have filled in values\", function () {\n\t  expect(1 + 1).toEqual(2);\n  });\n});\n",
+			"file": "koans/AboutExpects.js",
+			"file_size": 1173,
+			"file_write_time": 131917061021273660,
+			"settings":
+			{
+				"buffer_size": 1173,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "koans/AboutArrays.js",
+			"settings":
+			{
+				"buffer_size": 2943,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "koans/AboutFunctions.js",
+			"settings":
+			{
+				"buffer_size": 2919,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "koans/AboutObjects.js",
+			"settings":
+			{
+				"buffer_size": 3071,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lib/underscore-min.js",
+			"settings":
+			{
+				"buffer_size": 9960,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"isntall",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 136.0,
+		"history":
+		[
+			"$ git clone https://github.com/Floobits/floobits-sublime.git Floobits",
+			"$ cd ~/Library/Application\\ Support/Sublime\\ Text\\ 3/Packages",
+			"sublime.packages_path()"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/srathish/Documents/hrext07-javascript-koans ",
+		"/Users/srathish/Documents/hrext07-javascript-koans /koans",
+		"/Users/srathish/Documents/hrext07-javascript-koans /lib"
+	],
+	"file_history":
+	[
+		"/Users/srathish/Documents/hrext07-javascript-koans /koans/AboutFunctions.js",
+		"/Users/srathish/Documents/hrext07-javascript-koans /jasmine/runner_specs/suites/KoansRunnerSpec.js",
+		"/Users/srathish/Documents/hrext07-javascript-koans /jasmine/runner_specs/TestJSKoansRunner.html",
+		"/Users/srathish/Desktop/ratchet2.html",
+		"/Users/srathish/Desktop/ratchet.html"
+	],
+	"find":
+	{
+		"height": 39.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"any"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "/Users/srathish/Documents/hrext07-javascript-koans "
+		}
+	],
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "koans/AboutApplyingWhatWeHaveLearnt.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3873,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1731,
+								1734
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "koans/AboutHigherOrderFunctions.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3140,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 493.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "KoansRunner.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1574,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "koans/AboutExpects.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1173,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								888,
+								888
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "koans/AboutArrays.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2943,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								917,
+								917
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 50.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "koans/AboutFunctions.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2919,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2811,
+								2811
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 846.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "koans/AboutObjects.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3071,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "lib/underscore-min.js",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 9960,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 36.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 44.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 301.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
